@@ -76,13 +76,12 @@ class ExcelTemplateCreate:
         ws = wb["JANUARY"]
 
         numbers = [x for x in range(32)]
-        print(numbers)
         newlist = [int(x) for x in numbers if x > 0 and x<32]
         newlist.insert(0, None)
         newlist.insert(0, None)
 
-        ws.append(newlist)
-
+        for row in range(1):
+            ws.append(newlist)
 
         ws['B3'] = expenses[0]
         ws['B4'] = expenses[1]
@@ -104,10 +103,15 @@ class ExcelTemplateCreate:
         ws['B20'] = expenses[17]
         ws['B21'] = expenses[18]
 
-
-
-
         wb.save("budget.xlsx")
+
+    def iteration(self):
+        wb = load_workbook("budget.xlsx")
+        ws = wb["JANUARY"]
+
+        for cell in ws["B"]:
+            print(cell.value)
+
 
         '''
         ws['C2'] = 1
@@ -145,10 +149,10 @@ class ExcelTemplateCreate:
 
 
 t = ExcelTemplateCreate()
-t.create_sheets()
-t.create_templates_for_analisys()
-t.create_templates_for_months()
-
+#t.create_sheets()
+#t.create_templates_for_analisys()
+#t.create_templates_for_months()
+t.iteration()
 '''
         for row in range(1):
             ws1.append(range(0, 13))
