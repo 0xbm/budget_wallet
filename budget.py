@@ -27,14 +27,14 @@ class ExcelTemplateCreate:
         ws10 = wb.create_sheet(months[9], 10)
         ws11 = wb.create_sheet(months[10], 11)
         ws12 = wb.create_sheet(months[11], 12)
-        print(wb.sheetnames)
+        #print(wb.sheetnames)
         wb.save("budget.xlsx")
 
     def create_templates_for_analisys(self):
         wb = load_workbook("budget.xlsx")
         ws = wb['ANALISYS']
 
-        print(wb.sheetnames[1])
+        #print(wb.sheetnames[1])
         ws['C2'] = wb.sheetnames[1]
         ws['D2'] = wb.sheetnames[2]
         ws['E2'] = wb.sheetnames[3]
@@ -81,8 +81,11 @@ class ExcelTemplateCreate:
         newlist.insert(0, None)
         newlist.insert(0, None)
 
-        for row in range(1):
+        for row in range(2):
             ws.append(newlist)
+
+        ws['C1'] = datetime.date.today().year
+        ws.merge_cells('C1:AG1')
 
         ws['B3'] = expenses[0]
         ws['B4'] = expenses[1]
@@ -110,11 +113,13 @@ class ExcelTemplateCreate:
         wb = load_workbook("budget.xlsx")
         ws = wb["JANUARY"]
 
+
+        '''
         for cell in ws["B"]:
             print(cell.value)
 
 
-        '''
+        
         ws['C2'] = 1
         ws['D2'] = 2
         ws['E2'] = 3
@@ -142,17 +147,13 @@ class ExcelTemplateCreate:
         # ws['A'].alignment = Alignment(horizontal="center")
         #wb.save("budget.xlsx")
 
-        '''
-        ws1.column_dimensions["B"].width = 13
-        ws1.column_dimensions["C"].width = 13
-        ws1.column_dimensions["D"].width = 8
-        '''
+
 
 
 t = ExcelTemplateCreate()
-#t.create_sheets()
-#t.create_templates_for_analisys()
-#t.create_templates_for_months()
+t.create_sheets()
+t.create_templates_for_analisys()
+t.create_templates_for_months()
 t.iteration()
 '''
         for row in range(1):
