@@ -1,4 +1,5 @@
 from openpyxl import Workbook, load_workbook
+import openpyxl
 import datetime
 
 months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER",
@@ -33,7 +34,6 @@ class ExcelTemplateCreate:
         wb = load_workbook("budget.xlsx")
         ws = wb['ANALISYS']
 
-        # print(wb.sheetnames[1])
         ws['C2'] = wb.sheetnames[1]
         ws['D2'] = wb.sheetnames[2]
         ws['E2'] = wb.sheetnames[3]
@@ -71,7 +71,7 @@ class ExcelTemplateCreate:
         ws['C1'] = datetime.date.today().year
         wb.save("budget.xlsx")
 
-    def create_templates_for_months(self):
+    def create_templates_for_months_31(self):
         wb = load_workbook("budget.xlsx")
         ws = wb["JANUARY"]
 
@@ -82,6 +82,7 @@ class ExcelTemplateCreate:
 
         for row in range(2):
             ws.append(newlist)
+            break
 
         ws['C1'] = datetime.date.today().year
         ws.merge_cells('C1:AG1')
@@ -106,7 +107,31 @@ class ExcelTemplateCreate:
         ws['B20'] = expenses[17]
         ws['B21'] = expenses[18]
 
+        sheet1 = wb["JANUARY"]
+        sheet3 = wb["MARCH"]
+        sheet5 = wb["MAY"]
+        sheet7 = wb["JULY"]
+        sheet8 = wb["AUGUST"]
+        sheet10 = wb["OCTOBER"]
+        sheet12 = wb["DECEMBER"]
+
+        maxr = sheet1.max_row
+        maxc = sheet1.max_column
+        for r in range(1, maxr + 1):
+            for c in range(1, maxc + 1):
+                sheet1.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                sheet3.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                sheet5.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                sheet7.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                sheet8.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                sheet10.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                sheet12.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+
+        # TODO: create new file with copying sheets with 31 days in year
+
         wb.save("budget.xlsx")
+
+
 '''
     def iteration(self):
         wb = load_workbook("budget.xlsx")
@@ -155,14 +180,14 @@ class ExcelTemplateCreate:
         ws['X2'] = 3
         ws['Y2'] = 3
 '''
-        # ws['A'].alignment = Alignment(horizontal="center")
-        # wb.save("budget.xlsx")
+# ws['A'].alignment = Alignment(horizontal="center")
+# wb.save("budget.xlsx")
 
 
 t = ExcelTemplateCreate()
 # t.create_sheets()
 # t.create_templates_for_analisys()
-# t.create_templates_for_months()
+t.create_templates_for_months_31()
 # t.iteration()
 '''
         for row in range(1):
