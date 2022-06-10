@@ -1,7 +1,6 @@
 from openpyxl import Workbook, load_workbook
 import datetime
 
-
 months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER",
           "DECEMBER"]
 expenses = ["BILLS", "CAR", "SHOPPING", "EATING OUT", "CLOTHES", "HOME SHOPPING", "EVENTS", "GIFTS", "AGD RTV",
@@ -27,14 +26,14 @@ class ExcelTemplateCreate:
         ws10 = wb.create_sheet(months[9], 10)
         ws11 = wb.create_sheet(months[10], 11)
         ws12 = wb.create_sheet(months[11], 12)
-        #print(wb.sheetnames)
+        # print(wb.sheetnames)
         wb.save("budget.xlsx")
 
     def create_templates_for_analisys(self):
         wb = load_workbook("budget.xlsx")
         ws = wb['ANALISYS']
 
-        #print(wb.sheetnames[1])
+        # print(wb.sheetnames[1])
         ws['C2'] = wb.sheetnames[1]
         ws['D2'] = wb.sheetnames[2]
         ws['E2'] = wb.sheetnames[3]
@@ -77,7 +76,7 @@ class ExcelTemplateCreate:
         ws = wb["JANUARY"]
 
         numbers = [x for x in range(32)]
-        newlist = [int(x) for x in numbers if x > 0 and x<32]
+        newlist = [int(x) for x in numbers if 0 < x < 32]
         newlist.insert(0, None)
         newlist.insert(0, None)
 
@@ -108,13 +107,25 @@ class ExcelTemplateCreate:
         ws['B21'] = expenses[18]
 
         wb.save("budget.xlsx")
-
+'''
     def iteration(self):
         wb = load_workbook("budget.xlsx")
         ws = wb["JANUARY"]
 
+        for x in expenses:
+            print(x)
 
-        '''
+        choose_expense = input('Choose your expense: 1-19: ')
+        choose_day = input('Choose your expense: 1-31: ')
+        x = input('podaj kwote: ')
+
+        if choose_expense == '1' and choose_day == '1':
+            ws['C3'] = float(x)
+
+        wb.save("budget.xlsx")
+
+'''
+'''
         for cell in ws["B"]:
             print(cell.value)
 
@@ -143,18 +154,16 @@ class ExcelTemplateCreate:
         ws['W2'] = 3
         ws['X2'] = 3
         ws['Y2'] = 3
-        '''
+'''
         # ws['A'].alignment = Alignment(horizontal="center")
-        #wb.save("budget.xlsx")
-
-
+        # wb.save("budget.xlsx")
 
 
 t = ExcelTemplateCreate()
-t.create_sheets()
-t.create_templates_for_analisys()
-t.create_templates_for_months()
-t.iteration()
+# t.create_sheets()
+# t.create_templates_for_analisys()
+# t.create_templates_for_months()
+# t.iteration()
 '''
         for row in range(1):
             ws1.append(range(0, 13))
