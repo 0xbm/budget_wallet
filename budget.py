@@ -71,9 +71,9 @@ class ExcelTemplateCreate:
         ws['C1'] = datetime.date.today().year
         wb.save("budget.xlsx")
 
-    def create_templates_for_months_31(self):
+    def create_templates_for_months(self):
         wb = load_workbook("budget.xlsx")
-        ws = wb["JANUARY"]
+        ws1 = wb["JANUARY"]
 
         numbers = [x for x in range(32)]
         newlist = [int(x) for x in numbers if 0 < x < 32]
@@ -81,56 +81,67 @@ class ExcelTemplateCreate:
         newlist.insert(0, None)
 
         for row in range(2):
-            ws.append(newlist)
+            ws1.append(newlist)
             break
 
-        ws['C1'] = datetime.date.today().year
-        ws.merge_cells('C1:AG1')
+        ws1['C1'] = datetime.date.today().year
+        ws1.merge_cells('C1:AG1')
 
-        ws['B3'] = expenses[0]
-        ws['B4'] = expenses[1]
-        ws['B5'] = expenses[2]
-        ws['B6'] = expenses[3]
-        ws['B7'] = expenses[4]
-        ws['B8'] = expenses[5]
-        ws['B9'] = expenses[6]
-        ws['B10'] = expenses[7]
-        ws['B11'] = expenses[8]
-        ws['B12'] = expenses[9]
-        ws['B13'] = expenses[10]
-        ws['B14'] = expenses[11]
-        ws['B15'] = expenses[12]
-        ws['B16'] = expenses[13]
-        ws['B17'] = expenses[14]
-        ws['B18'] = expenses[15]
-        ws['B19'] = expenses[16]
-        ws['B20'] = expenses[17]
-        ws['B21'] = expenses[18]
-
-        sheet1 = wb["JANUARY"]
-        sheet3 = wb["MARCH"]
-        sheet5 = wb["MAY"]
-        sheet7 = wb["JULY"]
-        sheet8 = wb["AUGUST"]
-        sheet10 = wb["OCTOBER"]
-        sheet12 = wb["DECEMBER"]
-
-        maxr = sheet1.max_row
-        maxc = sheet1.max_column
+        ws1['B3'] = expenses[0]
+        ws1['B4'] = expenses[1]
+        ws1['B5'] = expenses[2]
+        ws1['B6'] = expenses[3]
+        ws1['B7'] = expenses[4]
+        ws1['B8'] = expenses[5]
+        ws1['B9'] = expenses[6]
+        ws1['B10'] = expenses[7]
+        ws1['B11'] = expenses[8]
+        ws1['B12'] = expenses[9]
+        ws1['B13'] = expenses[10]
+        ws1['B14'] = expenses[11]
+        ws1['B15'] = expenses[12]
+        ws1['B16'] = expenses[13]
+        ws1['B17'] = expenses[14]
+        ws1['B18'] = expenses[15]
+        ws1['B19'] = expenses[16]
+        ws1['B20'] = expenses[17]
+        ws1['B21'] = expenses[18]
+        # 31 days
+        ws3 = wb["MARCH"]
+        ws5 = wb["MAY"]
+        ws7 = wb["JULY"]
+        ws8 = wb["AUGUST"]
+        ws10 = wb["OCTOBER"]
+        ws12 = wb["DECEMBER"]
+        # 30 days
+        ws4 = wb["APRIL"]
+        ws6 = wb["JUNE"]
+        ws9 = wb["SEPTEMBER"]
+        ws11 = wb["NOVEMBER"]
+        # 29 days
+        ws2 = wb["FEBRUARY"]
+        maxr = ws1.max_row
+        maxc = ws1.max_column
         for r in range(1, maxr + 1):
             for c in range(1, maxc + 1):
-                sheet1.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
-                sheet3.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
-                sheet5.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
-                sheet7.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
-                sheet8.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
-                sheet10.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
-                sheet12.cell(row=r, column=c).value = sheet1.cell(row=r, column=c).value
+                ws2.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws3.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws4.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws5.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws6.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws7.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws8.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws9.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws10.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws11.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
+                ws12.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
 
         # TODO: create new file with copying sheets with 31 days in year
-
+        # TODO: create months with 30 days and FEBRUARY
+        # ws.delete_cols(30,1) #30 kolumna remove
+        ws1.delete_rows(22,10)
+        ws2.delete_rows(22, 10)
         wb.save("budget.xlsx")
-
 
 '''
     def iteration(self):
@@ -187,7 +198,7 @@ class ExcelTemplateCreate:
 t = ExcelTemplateCreate()
 # t.create_sheets()
 # t.create_templates_for_analisys()
-t.create_templates_for_months_31()
+t.create_templates_for_months()
 # t.iteration()
 '''
         for row in range(1):
