@@ -1,5 +1,4 @@
 from openpyxl import Workbook, load_workbook
-import openpyxl
 import datetime
 
 months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER",
@@ -71,22 +70,23 @@ class ExcelTemplateCreate:
         ws['C1'] = datetime.date.today().year
         wb.save("budget.xlsx")
 
+
     def create_templates_for_months(self):
         wb = load_workbook("budget.xlsx")
         ws1 = wb["JANUARY"]
 
         numbers = [x for x in range(32)]
+        print(numbers)
         newlist = [int(x) for x in numbers if 0 < x < 32]
+        print(newlist)
         newlist.insert(0, None)
         newlist.insert(0, None)
 
         for row in range(2):
             ws1.append(newlist)
-            break
 
-        ws1['C1'] = datetime.date.today().year
         ws1.merge_cells('C1:AG1')
-
+        ws1['C1'] = datetime.date.today().year
         ws1['B3'] = expenses[0]
         ws1['B4'] = expenses[1]
         ws1['B5'] = expenses[2]
@@ -120,6 +120,7 @@ class ExcelTemplateCreate:
         ws11 = wb["NOVEMBER"]
         # 29 days
         ws2 = wb["FEBRUARY"]
+
         maxr = ws1.max_row
         maxc = ws1.max_column
         for r in range(1, maxr + 1):
@@ -136,12 +137,28 @@ class ExcelTemplateCreate:
                 ws11.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
                 ws12.cell(row=r, column=c).value = ws1.cell(row=r, column=c).value
 
-        # TODO: create new file with copying sheets with 31 days in year
-        # TODO: create months with 30 days and FEBRUARY
-        # ws.delete_cols(30,1) #30 kolumna remove
-        ws1.delete_rows(22,10)
-        ws2.delete_rows(22, 10)
+        ws4.delete_cols(33, 10)
+        ws6.delete_cols(33, 10)
+        ws9.delete_cols(33, 10)
+        ws11.delete_cols(33, 10)
+        ws2.delete_cols(31, 10)
+
+        ws1['C1'] = datetime.date.today().year
+        ws1.merge_cells('C1:AG1')
+        ws2.merge_cells('C1:AG1')
+        ws3.merge_cells('C1:AG1')
+        ws4.merge_cells('C1:AG1')
+        ws5.merge_cells('C1:AG1')
+        ws6.merge_cells('C1:AG1')
+        ws7.merge_cells('C1:AG1')
+        ws8.merge_cells('C1:AG1')
+        ws9.merge_cells('C1:AG1')
+        ws10.merge_cells('C1:AG1')
+        ws11.merge_cells('C1:AG1')
+        ws12.merge_cells('C1:AG1')
+
         wb.save("budget.xlsx")
+
 
 '''
     def iteration(self):
@@ -196,8 +213,9 @@ class ExcelTemplateCreate:
 
 
 t = ExcelTemplateCreate()
-# t.create_sheets()
-# t.create_templates_for_analisys()
+t.create_sheets()
+t.create_templates_for_analisys()
+#t.asd()
 t.create_templates_for_months()
 # t.iteration()
 '''
