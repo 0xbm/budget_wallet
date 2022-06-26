@@ -145,16 +145,16 @@ class ExcelTemplateCreate:
 
         ws1['C1'] = datetime.date.today().year
         ws1.merge_cells('C1:AG1')
-        ws2.merge_cells('C1:AG1')
+        ws2.merge_cells('C1:AD1')
         ws3.merge_cells('C1:AG1')
-        ws4.merge_cells('C1:AG1')
+        ws4.merge_cells('C1:AF1')
         ws5.merge_cells('C1:AG1')
-        ws6.merge_cells('C1:AG1')
+        ws6.merge_cells('C1:AF1')
         ws7.merge_cells('C1:AG1')
         ws8.merge_cells('C1:AG1')
-        ws9.merge_cells('C1:AG1')
+        ws9.merge_cells('C1:AF1')
         ws10.merge_cells('C1:AG1')
-        ws11.merge_cells('C1:AG1')
+        ws11.merge_cells('C1:AF1')
         ws12.merge_cells('C1:AG1')
 
         wb.save("budget.xlsx")
