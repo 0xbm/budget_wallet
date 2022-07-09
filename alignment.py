@@ -1,6 +1,5 @@
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
-from openpyxl.styles import Border, Side
 from openpyxl.styles import PatternFill
 
 
@@ -111,6 +110,7 @@ alignment_31()
 
 
 '''
+from openpyxl.styles import Border, Side
 ws1.column_dimensions["B"].width = 13
 ws1.column_dimensions["C"].width = 13
 ws1.column_dimensions["D"].width = 8
